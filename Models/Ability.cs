@@ -1,4 +1,4 @@
-﻿namespace W9_assignment_template.Models;
+using W9_assignment_template.Models;
 
 public abstract class Character : ICharacter
 {
@@ -11,14 +11,22 @@ public abstract class Character : ICharacter
 
     // Navigation property to Room
     public virtual Room Room { get; set; }
+
+    // Navigation property to Abilities
+    public virtual ICollection<Ability> Abilities { get; set; }
+
     public virtual void Attack(ICharacter target)
     {
         Console.WriteLine($"{Name} attacks {target.Name}!");
     }
-    public virtual void ExecuteAbility(Ability ability)
+}
+
+public abstract class Ability
 {
-    Console.WriteLine($"{Name} uses {ability.Name}!");
-}
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
 
+    // Navigation property to Characters
+    public virtual ICollection<Character> Characters { get; set; }
 }
-
